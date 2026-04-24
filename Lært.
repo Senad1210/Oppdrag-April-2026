@@ -1,0 +1,31 @@
+
+# 📚 Hva jeg har lært
+
+---
+
+## Views (visninger)
+Jeg lærte å lage views, som er lagrede spørringer du kan bruke som om de var tabeller. I stedet for å skrive en lang og komplisert spørring hver gang, lager du den én gang som en view og kaller den med et enkelt navn. `v_compact` og `v_summary` er begge views som gjør det enkelt å hente akkurat den informasjonen du trenger uten å skrive alt på nytt hver gang.
+
+```sql
+CREATE OR REPLACE VIEW v_compact AS
+SELECT id, product_name, color_name, hex, pressure_lvl, price, stock
+FROM products;
+```
+
+---
+
+## LIKE med jokertegn 
+Jeg lærte at `LIKE '%søkeord%'` lar deg søke etter delvise treff i tekst. Prosenttegnet `%` fungerer som et jokertegn som betyr "hva som helst kan stå her". Det er dette som gjør at søkefeltet på nettsiden kan finne "ROYAL BLUE", "BABY BLUE" og "LIGHT BLUE" når du bare skriver "blue".
+
+```sql
+SELECT * FROM products WHERE color_name LIKE '%blue%';
+```
+
+---
+
+## NULL-verdier
+Jeg lærte forskjellen på en tom verdi og `NULL`. `NULL` betyr at verdien ikke eksisterer i det hele tatt – ikke at den er tom. Mange produkter i databasen mangler HEX, CMYK og RGB fordi de er effektprodukter uten farge. Ved å bruke `NULL` i stedet for å tvinge inn falske verdier, holder databasen seg ærlig og presis.
+
+```sql
+INSERT INTO products (hex, cmyk, rgb) VALUES (NULL, NULL, NULL);
+```
